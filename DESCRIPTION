@@ -1,0 +1,10 @@
+Package: opentraffic
+Type: OpenCPU Application
+Title: OpenTraffic
+Version: 0.6
+Date: 2015-12-06
+Author: Gorka Kobeaga
+Maintainer: Gorka <gkobeaga@bcamath.org>
+Description: R functions for OpenTraffic
+License: GPL-2
+Suggests: opencpu (>= 1.0.1)
