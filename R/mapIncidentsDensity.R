@@ -64,7 +64,6 @@ map_get_density <- function(
 
 }
 
-types <- properties$types
 mongo_calculate_incicents_density <- function(con,traffic_history_collection,types,provinces_convex_huld,grd,method,dens_fun_params){
 
   traffic_history_cursor <- rmongodb::mongo.find(
