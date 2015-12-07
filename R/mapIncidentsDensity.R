@@ -4,7 +4,6 @@ map_get_density <- function(
                         method          = 'splancs2d',
                         dens_fun_params = list( h0 ))
 {
-    
 
   # Mongo Connections
   db <- 'meteor'
@@ -64,7 +63,7 @@ map_get_density <- function(
 
 }
 
-mongo_calculate_incicents_density <- function(con,traffic_history_collection,types,provinces_convex_huld,grd,method,dens_fun_params){
+mongo_calculate_incicents_density <- function(con,traffic_history_collection,types,provinces_convex_huld,grd,method,dens_fun_params = list( h0 )){
 
   traffic_history_cursor <- rmongodb::mongo.find(
       con, 
@@ -116,7 +115,11 @@ mongo_calculate_incicents_density <- function(con,traffic_history_collection,typ
 }
 
 
-get_density_splancs2d <- function(obs_points,provinces_convex_huld,grd,dens_fun_params,grid_polys){
+get_density_splancs2d <- function(obs_points,
+                                  provinces_convex_huld,
+                                  grd,
+                                  dens_fun_params = list( h0 ),
+                                  grid_polys){
   
   
   # Add properties to the polygons

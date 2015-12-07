@@ -1,5 +1,4 @@
 mongo_cursor_to_grid_topology <- function(cursor,ps4 ='+init=epsg:3857'){  
-  cursor <- grd_cursor
 
   tmp_list <- rmongodb::mongo.cursor.to.list(cursor)
 
