@@ -30,10 +30,10 @@ map_get_provinces_convex_huld <- function(con,collection, provinces_selected){
 
   provinces_list <- rmongodb::mongo.cursor.to.list(provinces_cursor)
 
-  tmpfile <- tempfile()
+  tmpfile <- paste(tempfile(),'.topojson',sep="")
   writeLines(rjson::toJSON(provinces_list[[1]],method='C'),tmpfile)
 
-  provinces_list <- geojsonio::geojson_list(geojsonio::topojson_read('prueba.topojson'))
+  provinces_list <- geojsonio::geojson_list(geojsonio::topojson_read(tmpfile))
 
   provinces_unlist_points <- c()
 
