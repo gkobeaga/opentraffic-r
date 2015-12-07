@@ -16,14 +16,6 @@ mongo_cursor_to_grid_topology <- function(cursor,ps4 ='+init=epsg:3857'){
 }
 
 map_get_provinces_convex_huld <- function(con,collection, provinces_selected){
-  provinces_query <- paste(
-                         '{ 
-                            "objects.provinces.geometries.properties.name" : 
-                              {"$in" : 
-                                  ["',paste(provinces_selected,collapse="\",\""),'"]
-                              }
-                          }'
-                        ,sep="")
 
   provinces_cursor <- rmongodb::mongo.find(con, collection)#,
 
@@ -37,7 +29,8 @@ map_get_provinces_convex_huld <- function(con,collection, provinces_selected){
   provinces_unlist_points <- c()
 
   for (province in provinces_list$features)
-    provinces_unlist_points <- c(provinces_unlist_points, unlist(province$geometry$coordinates))
+    if (province$properties$name %in% provinces_selected)   
+      provinces_unlist_points <- c(provinces_unlist_points, unlist(province$geometry$coordinates))
 
   provinces_pts <- structure(list(
                   x = provinces_unlist_points[seq(1,length(provinces_unlist_points),2)], 
