@@ -28,10 +28,10 @@ map_get_provinces_convex_huld <- function(con,collection, provinces_selected){
 
   provinces_unlist_points <- c()
 
-  for (province in provinces_list$features)
-    if (province$properties$name %in% provinces_selected)   
+  for (province in provinces_list$features) 
+    if (province$properties$name %in% provinces_selected) 
       provinces_unlist_points <- c(provinces_unlist_points, unlist(province$geometry$coordinates))
-
+    
   provinces_pts <- structure(list(
                   x = provinces_unlist_points[seq(1,length(provinces_unlist_points),2)], 
                   y = provinces_unlist_points[seq(2,length(provinces_unlist_points),2)]),
@@ -78,7 +78,7 @@ map_make_grid <- function(con, provinces_convex_huld, grid_collection, propertie
   rgdal::writeOGR(grid_polys_df, shpfile, layer="grid", driver="ESRI Shapefile")
 
   system2('topojson', c('-o', topojsonfile, '--id-property id', '-p value=value' ,paste('grid=',shpfile,sep="")))
-  grid_list <- rjson::fromJSON(paste(readLines(topojsonfile),collapse=""))
+  grid_list <- rjson::fromJSON(file=topojsonfile)
 
   grid_list$properties <- properties
   grid_list$grd_params <- grd_params
